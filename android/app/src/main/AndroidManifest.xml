@@ -4,7 +4,6 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <user-feature android:name="android.hardware.type.watch" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

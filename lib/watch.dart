@@ -1,0 +1,79 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:wear_plus/wear_plus.dart';
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Wear Os App',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+       
+      ),
+      home: const WatchFace(),
+    );
+  }
+}
+
+class WatchFace extends StatefulWidget {
+  const WatchFace({super.key});
+
+  @override
+  _WatchFaceState createState() => _WatchFaceState();
+}
+
+class _WatchFaceState extends State<WatchFace> {
+  String _timeString = "00:00:00";
+  @override
+  void initState() {
+    super.initState();
+    _timeString = _formatDateTime(DateTime.now());
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+  }
+
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedDateTime = _formatDateTime(now);
+    setState(() {
+      _timeString = formattedDateTime;
+    });
+  }
+
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat("HH:mm:ss").format(dateTime);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text("00:00",style: TextStyle(fontSize: 48,fontWeight: FontWeight.bold),),
+      )
+    );
+
+    //   body: AmbientMode(
+    //     builder: (context, mode, child) {
+    //       if (mode == WearMode.ambient) {
+    //         // ie low battery
+    //         return Center(child: FlutterLogo(size: 200.0));
+    //       } else {
+    //         return Center(
+    //           child: Text(
+    //             _timeString,
+    //             style: const TextStyle(
+    //               fontSize: 48,
+    //               fontWeight: FontWeight.bold,
+    //             ),
+    //           ),
+    //         );
+    //       }
+    //     },
+    //   ),
+    // );
+  }
+}
