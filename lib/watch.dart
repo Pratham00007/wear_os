@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wear_plus/wear_plus.dart';
@@ -12,7 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Wear Os App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark
        
       ),
       home: const WatchFace(),
@@ -52,7 +52,8 @@ class _WatchFaceState extends State<WatchFace> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("00:00",style: TextStyle(fontSize: 48,fontWeight: FontWeight.bold),),
+        //_textstring for current time
+        child: Text(_timeString,style: TextStyle(fontSize: 48,fontWeight: FontWeight.bold),),
       )
     );
 
